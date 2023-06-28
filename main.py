@@ -2,10 +2,12 @@ from paramiko import SSHClient, AutoAddPolicy
 from dotenv import dotenv_values
 from flask import Flask, jsonify, request
 
-HOST = dotenv_values('HOST')
-USER = dotenv_values('USER')
-PASSWORD = dotenv_values('PASSWORD')
-PORT = dotenv_values('PORT')
+env = dotenv_values('.env')
+HOST = env['HOST']
+USER = env['USER']
+PASSWORD = env['PASSWORD']
+PORT = env['PORT']
+
 print(HOST, USER, PASSWORD, PORT)
 client = SSHClient()
 #client.load_system_host_keys()
