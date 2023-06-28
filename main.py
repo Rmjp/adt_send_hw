@@ -16,7 +16,7 @@ client.look_for_keys(True)
 client.connect(HOST, username=USER,port=PORT)
 
 def check_connect():
-    if !client.get_transport().is_active():
+    if not client.get_transport().is_active():
         client.connect(HOST, username=USER,port=PORT)
 
 def hw_status():
