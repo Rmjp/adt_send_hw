@@ -49,8 +49,8 @@
             fetch('/status')
             .then(response => response.text())
             .then(data => {
-                data = data.replace(/\n/g, '<br>').replace(/\x1B/g, '\t');
-                document.getElementById('status').innerHTML = data;
+                data = data.replace(/\n/g, '<br>').replace(/\x1B/g, '&#9;');
+                document.getElementById('status').innerHTML = "<p>"+data+"</p>";
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -72,8 +72,8 @@
                 }
             })
             .then(data => {
-                data = data.replace(/\n/g, '<br>').replace(/\x1B/g, '\t');
-                document.getElementById('status').innerHTML = data;
+                data = data.replace(/\n/g, '<br>').replace(/\x1B/g, '&#9;');
+                document.getElementById('status').innerHTML = "<p>"+data+"</p>";
             })
             .catch(error => {
                 console.error(error);
