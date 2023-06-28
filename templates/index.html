@@ -49,10 +49,34 @@
             fetch('/status')
             .then(response => response.text())
             .then(data => {
+                data = data.replace(/\n/g, '<br>');
                 document.getElementById('status').textContent = data;
             })
             .catch(error => {
                 console.error('Error:', error);
+            });
+        }
+        function submitForm() {
+            var form = document.getElementById('uploadForm');
+            var formData = new FormData(form);
+
+            fetch('/upload', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    return response.text();
+                } else {
+                    throw new Error('Error: ' + response.status);
+                }
+            })
+            .then(data => {
+                data = data.replace(/\n/g, '<br>');
+                document.getElementById('status').textContent = data;
+            })
+            .catch(error => {
+                console.error(error);
             });
         }
     </script>
@@ -67,7 +91,7 @@
         <br>
         <input type="text" name="lab_name" placeholder="Lab Name" required>
         <br>
-        <input type="submit" value="Upload">
+        <input type="submit" value="Upload" onclick="submitForm()">
     </form>
 
     <style>
