@@ -33,7 +33,7 @@ def send_file_to_server(file_name, callback=None):
     check_connect()
     sftp = client.open_sftp()
     print(current_dir + "/" +file_name)
-    sftp.put(current_dir + "/" +file_name, './send/'+file_name, callback = callback)
+    sftp.put(current_dir + "/" +file_name, './send/'+file_name, callback = callbackf)
     sftp.close()
 
 def check_auth(auth):
@@ -44,7 +44,7 @@ def check_auth(auth):
 new_filename = "send.c"
 lab_name = ""
 
-def callback(transferred, total):
+def callbackf(transferred, total):
     if transferred == total:
         print("SFTP transfer complete.")
         hw_send(lab_name, new_filename)
