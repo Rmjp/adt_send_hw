@@ -31,6 +31,7 @@ def hw_send(lab_name, file_name):
 def send_file_to_server(file_name):
     check_connect()
     sftp = client.open_sftp()
+    print(current_dir + "/" +file_name)
     sftp.put(current_dir + "/" +file_name, '~/send/'+file_name)
     sftp.close()
 
