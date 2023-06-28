@@ -1,6 +1,6 @@
 from paramiko import SSHClient, AutoAddPolicy
 from dotenv import dotenv_values
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 
 env = dotenv_values('.env')
 HOST = env['HOST']
