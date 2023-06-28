@@ -1,13 +1,14 @@
 from paramiko import SSHClient, AutoAddPolicy
 from dotenv import dotenv_values
 from flask import Flask, jsonify, request, render_template
+import os
 
 env = dotenv_values('.env')
 HOST = env['HOST']
 USER = env['USER']
 PASSWORD = env['PASSWORD']
 PORT = env['PORT']
-
+current_dir = os.getcwd()
 print(HOST, USER, PASSWORD, PORT)
 client = SSHClient()
 client.set_missing_host_key_policy(AutoAddPolicy())
@@ -30,7 +31,7 @@ def hw_send(lab_name, file_name):
 def send_file_to_server(file_name):
     check_connect()
     sftp = client.open_sftp()
-    sftp.put(file_name, '~/send/'+file_name)
+    sftp.put(current_dir + "/" +file_name, '~/send/'+file_name)
     sftp.close()
 
 def check_auth(auth):
