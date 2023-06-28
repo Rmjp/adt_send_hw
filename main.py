@@ -12,7 +12,6 @@ client = SSHClient()
 #client.load_system_host_keys()
 #client.load_host_keys('~/.ssh/known_hosts')
 #client.set_missing_host_key_policy(AutoAddPolicy())
-client.look_for_keys(True)
 client.connect(HOST, username=USER,port=PORT)
 
 def check_connect():
