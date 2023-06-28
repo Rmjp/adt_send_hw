@@ -33,6 +33,11 @@ def send_file_to_server(file_name):
     sftp.put(file_name, '~/send/'+file_name)
     sftp.close()
 
+def check_auth(auth):
+    if auth == 'run1511A':
+        return True
+    return False
+
 app = Flask(__name__)
 
 @app.route('/')
@@ -41,6 +46,9 @@ def index():
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
+    val = request.cookies.get('auth')
+    if not check_auth(val):
+        return 'Not Auth', 401
     if 'file' not in request.files:
         return 'No file part in the request', 400
 
@@ -70,10 +78,13 @@ def upload_file():
 '''
 @app.route('/status')
 def status():
+    val = request.cookies.get('auth')
+    if not check_auth(val):
+        return 'Not Auth', 401
     status = hw_status()
     return status
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=3002)
+    app.run(host='127.0.0.1', port=3001)
 
 client.close()
