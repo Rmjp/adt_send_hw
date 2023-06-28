@@ -40,7 +40,7 @@ def check_auth(auth):
     if auth == 'run1511A':
         return True
     return False
-    
+
 new_filename = "send.c"
 lab_name = ""
 
@@ -72,7 +72,7 @@ def upload_file():
 
     file.save(new_filename)
     lab_name = request.form['lab_name']
-    send_file_to_server(new_filename, callback)
+    send_file_to_server(new_filename, callback = callback)
     hw_send(lab_name, new_filename)
     return "ok"
 
