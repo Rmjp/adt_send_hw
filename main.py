@@ -6,7 +6,7 @@ HOST = os.getenv('HOST')
 USER = os.getenv('USER')
 PASSWORD = os.getenv('PASSWORD')
 PORT = os.getenv('PORT')
-
+print(HOST, USER, PASSWORD, PORT)
 client = SSHClient()
 #client.load_system_host_keys()
 #client.load_host_keys('~/.ssh/known_hosts')
