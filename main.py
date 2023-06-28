@@ -33,7 +33,7 @@ def send_file_to_server(file_name, callback=None):
     check_connect()
     sftp = client.open_sftp()
     print(current_dir + "/" +file_name)
-    sftp.put(current_dir + "/" +file_name, './send/'+file_name)
+    sftp.put(current_dir + "/" +file_name, './send/'+file_name, callback = callback)
     sftp.close()
 
 def check_auth(auth):
@@ -72,7 +72,7 @@ def upload_file():
 
     file.save(new_filename)
     lab_name = request.form['lab_name']
-    send_file_to_server(new_filename, callback = callback)
+    send_file_to_server(new_filename)
     hw_send(lab_name, new_filename)
     return "ok"
 
