@@ -23,32 +23,22 @@ def hw_status():
     stdin, stdout, stderr = client.exec_command('hw-status --all')
     return stdout.read().decode('utf-8')
 
-new_filename = "send.c"
-lab_name = ""
-def hw_send():
+def hw_send(lab_name, file_name):
     check_connect()
-    file_name = new_filename
-    x = 'hw-send '+lab_name+' '+file_name
-    stdin, stdout, stderr = client.exec_command(x)
-    print("out: " + stdout.read().decode('utf-8') + "err: " +stderr.read().decode('utf-8'))
+    stdin, stdout, stderr = client.exec_command('hw-send '+lab_name+' '+ "~/send/" + file_name)
+    return stdout.read().decode('utf-8') + stderr.read().decode('utf-8')
 
-def send_file_to_server(file_name, callback=None):
+def send_file_to_server(file_name):
     check_connect()
     sftp = client.open_sftp()
     print(current_dir + "/" +file_name)
-    sftp.put(current_dir + "/" +file_name, './send/'+file_name, callback = callbackf)
+    sftp.put(current_dir + "/" +file_name, './send/'+file_name)
     sftp.close()
 
 def check_auth(auth):
     if auth == 'run1511A':
         return True
     return False
-
-
-def callbackf(transferred, total):
-    if transferred == total:
-        print("SFTP transfer complete.")
-        hw_send()
 
 app = Flask(__name__)
 
@@ -72,10 +62,9 @@ def upload_file():
     new_filename = 'send.c'  # Specify the new filename here
 
     file.save(new_filename)
-    lab_name = request.form['lab_name']
     send_file_to_server(new_filename)
-    hw_send()
-    return "ok"
+    lab_name = request.form['lab_name']
+    return hw_send(lab_name, new_filename)
 
 '''
 +-------------------+-------+---------+-----------------------------------+------------+
