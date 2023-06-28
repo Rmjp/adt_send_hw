@@ -4,15 +4,14 @@ from flask import Flask, jsonify, request
 
 HOST = os.getenv('HOST')
 USER = os.getenv('USER')
-KEY_FILE = os.getenv('KEY_FILE')
-PASSPHRASE = os.getenv('PASSPHRASE')
+PASSWORD = os.getenv('PASSWORD')
 PORT = os.getenv('PORT')
 
 client = SSHClient()
 #client.load_system_host_keys()
 #client.load_host_keys('~/.ssh/known_hosts')
 #client.set_missing_host_key_policy(AutoAddPolicy())
-client.connect(HOST, username=USER,port=PORT)
+client.connect(HOST, username=USER, password=PASSWORD,port=PORT)
 
 def check_connect():
     if not client.get_transport().is_active():
