@@ -23,7 +23,9 @@ def hw_status():
     stdin, stdout, stderr = client.exec_command('hw-status --all')
     return stdout.read().decode('utf-8')
 
-def hw_send(lab_name, file_name):
+new_filename = "send.c"
+lab_name = ""
+def hw_send():
     check_connect()
     x = 'hw-send '+lab_name+' '+file_name
     stdin, stdout, stderr = client.exec_command(x)
@@ -41,8 +43,6 @@ def check_auth(auth):
         return True
     return False
 
-new_filename = "send.c"
-lab_name = ""
 
 def callbackf(transferred, total):
     if transferred == total:
