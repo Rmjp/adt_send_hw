@@ -40,10 +40,14 @@ def check_auth(auth):
     if auth == 'run1511A':
         return True
     return False
+    
+new_filename = "send.c"
+lab_name = ""
 
 def callback(transferred, total):
     if transferred == total:
         print("SFTP transfer complete.")
+        hw_send(lab_name, new_filename)
 
 app = Flask(__name__)
 
