@@ -25,7 +25,6 @@ def hw_status():
 
 def hw_send(lab_name, file_name):
     check_connect()
-    de
     x = 'hw-send '+lab_name+' '+file_name
     stdin, stdout, stderr = client.exec_command(x)
     return "out: " + stdout.read().decode('utf-8') + "err: " +stderr.read().decode('utf-8')
