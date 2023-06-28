@@ -25,11 +25,12 @@ def hw_status():
 
 def hw_send(lab_name, file_name):
     check_connect()
+    de
     x = 'hw-send '+lab_name+' '+file_name
     stdin, stdout, stderr = client.exec_command(x)
     return "out: " + stdout.read().decode('utf-8') + "err: " +stderr.read().decode('utf-8')
 
-def send_file_to_server(file_name):
+def send_file_to_server(file_name, callback=None):
     check_connect()
     sftp = client.open_sftp()
     print(current_dir + "/" +file_name)
@@ -63,10 +64,9 @@ def upload_file():
     new_filename = 'send.c'  # Specify the new filename here
 
     file.save(new_filename)
-    send_file_to_server(new_filename)
     lab_name = request.form['lab_name']
-    ret = hw_send(lab_name, new_filename)
-    return ret
+    send_file_to_server(new_filename, hw_send(lab_name, new_filename))
+    return "ok"
 
 '''
 +-------------------+-------+---------+-----------------------------------+------------+
