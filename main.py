@@ -47,7 +47,7 @@ lab_name = ""
 def callbackf(transferred, total):
     if transferred == total:
         print("SFTP transfer complete.")
-        hw_send(lab_name, new_filename)
+        hw_send()
 
 app = Flask(__name__)
 
@@ -73,7 +73,7 @@ def upload_file():
     file.save(new_filename)
     lab_name = request.form['lab_name']
     send_file_to_server(new_filename)
-    hw_send(lab_name, new_filename)
+    hw_send()
     return "ok"
 
 '''
