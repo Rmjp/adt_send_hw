@@ -50,7 +50,7 @@
             .then(response => response.text())
             .then(data => {
                 data = data.replace(/\n/g, '<br>').replace(/\x1B/g, '\t');
-                document.getElementById('status').textContent = data;
+                document.getElementById('status').innerHTML = data;
             })
             .catch(error => {
                 console.error('Error:', error);
@@ -73,7 +73,7 @@
             })
             .then(data => {
                 data = data.replace(/\n/g, '<br>').replace(/\x1B/g, '\t');
-                document.getElementById('status').textContent = data;
+                document.getElementById('status').innerHTML = data;
             })
             .catch(error => {
                 console.error(error);
