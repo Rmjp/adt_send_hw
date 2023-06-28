@@ -27,7 +27,7 @@ def hw_send(lab_name, file_name):
     check_connect()
     print('hw-send '+lab_name+' '+file_name)
     stdin, stdout, stderr = client.exec_command('hw-send '+lab_name+' '+file_name)
-    return stdout.read().decode('utf-8') + stderr.read().decode('utf-8') + "asdf"
+    return stdin.read().decode('utf-8') + "out: " + stdout.read().decode('utf-8') + "err: " +stderr.read().decode('utf-8')
 
 def send_file_to_server(file_name):
     check_connect()
