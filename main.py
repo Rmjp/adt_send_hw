@@ -64,7 +64,8 @@ def upload_file():
 
     file.save(new_filename)
     lab_name = request.form['lab_name']
-    send_file_to_server(new_filename, hw_send(lab_name, new_filename))
+    send_file_to_server(new_filename)
+    hw_send(lab_name, new_filename)
     return "ok"
 
 '''
