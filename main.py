@@ -27,6 +27,7 @@ new_filename = "send.c"
 lab_name = ""
 def hw_send():
     check_connect()
+    file_name = new_filename
     x = 'hw-send '+lab_name+' '+file_name
     stdin, stdout, stderr = client.exec_command(x)
     print("out: " + stdout.read().decode('utf-8') + "err: " +stderr.read().decode('utf-8'))
