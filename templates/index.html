@@ -52,11 +52,11 @@
 
             for(i=3; i<data.size-1; i++){
                 x = data[i].split(/\s+/);
-                labname += x[1];
-                labno += x[3];
-                submit += x[5];
-                status += x[8];
-                duedate += x[10];
+                labname.push(x[1]);
+                labno.push(x[3]);
+                submit.push(x[5]);
+                status.push(x[8]);
+                duedate.push(x[10]);
             }
 
             for(i=0; i<labname.size; i++){
