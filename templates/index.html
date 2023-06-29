@@ -47,7 +47,7 @@
             labname = [];
             labno = [];
             submit = [];
-            status = [];
+            statuss = [];
             duedate = [];
 
             for(i=3; i<data.length-2; i++){
@@ -55,7 +55,7 @@
                 labname.push(x[1]);
                 labno.push(x[3]);
                 submit.push(x[5]);
-                status.push(x[7]);
+                statuss.push(x[7]);
                 duedate.push(x[9]);
             }
 
@@ -64,7 +64,7 @@
                 ret += "<td>"+labname[i]+"</td>";
                 ret += "<td>"+labno[i]+"</td>";
                 ret += "<td>"+submit[i]+"</td>";
-                ret += "<td>"+status[i]+"</td>";
+                ret += "<td>"+statuss[i]+"</td>";
                 ret += "<td>"+duedate[i]+"</td>";
                 ret += "</tr>";
             }
