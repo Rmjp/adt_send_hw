@@ -23,19 +23,53 @@
         </div>
     </div>
     <script>
-// +-------------------+-------+---------+-----------------------------------+------------+ 0
-// |      LABNAME      | LABNO | #SUBMIT |              STATUS               |  DUEDATE   | 1
-// +-------------------+-------+---------+-----------------------------------+------------+ 2
-// |\x1BhelloWorld\x1B|\x1B01\x1B|\x1B1\x1B|\x1BP\x1B|\x1B10/7/2023\x1B|
-// |\x1Btrapezoid     |  01   |    6    |               PPPP                | 10/7/2023  |
-// |\x1Bwaiting      |  01   |    1    |               PPPP                | 10/7/2023  |
-// |\x1BtimeConverter   |  01   |    3    |               PPPPP               | 10/7/2023  |
-// |\x1BasciiCompare    |  01   |    0    |             NOT SEND              | 10/7/2023  |
-// |       eater       |  01   |    0    |             NOT SEND              | 10/7/2023  |
+// +-------------------+-------+---------+-----------------------------------+------------+
+// |      LABNAME      | LABNO | #SUBMIT |              STATUS               |  DUEDATE   |
+// +-------------------+-------+---------+-----------------------------------+------------+
+// |    helloWorld     |  01   |    1    |	[92m                 P                 	[0m| 10/7/2023  |
+// |     trapezoid     |  01   |    6    |	[92m               PPPP                	[0m| 10/7/2023  |
+// |      waiting      |  01   |    1    |	[92m               PPPP                	[0m| 10/7/2023  |
+// |   timeConverter   |  01   |    3    |	[92m               PPPPP               	[0m| 10/7/2023  |
+// |   asciiCompare    |  01   |    8    |	[91m               -----               	[0m| 10/7/2023  |
+// |       eater       |  01   |    1    |	[91m             --------              	[0m| 10/7/2023  |
 // +-------------------+-------+---------+-----------------------------------+------------+
         function data_format(data){
             data = data.split("\n");
-            data
+            ret = "<table border='1'>";
+            ret += "<tr>";
+            ret += "<th>LABNAME</th>";
+            ret += "<th>LABNO</th>";
+            ret += "<th>#SUBMIT</th>";
+            ret += "<th>STATUS</th>";
+            ret += "<th>DUEDATE</th>";
+            ret += "</tr>";
+
+            labname = [];
+            labno = [];
+            submit = [];
+            status = [];
+            duedate = [];
+
+            for(i=3; i<data.size()-1; i++){
+                x = data[i].split(/\s+/);
+                labname += x[1];
+                labno += x[3];
+                submit += x[5];
+                status += x[8];
+                duedate += x[10];
+            }
+
+            for(i=0; i<labname.size(); i++){
+                ret += "<tr>";
+                ret += "<td>"+labname[i]+"</td>";
+                ret += "<td>"+labno[i]+"</td>";
+                ret += "<td>"+submit[i]+"</td>";
+                ret += "<td>"+status[i]+"</td>";
+                ret += "<td>"+duedate[i]+"</td>";
+                ret += "</tr>";
+            }
+            ret += "</table>";
+            return ret;
         }
         if(document.cookie != ""){
             document.getElementById("myModal").style.display = "none";
@@ -63,8 +97,9 @@
             fetch('/status')
             .then(response => response.text())
             .then(data => {
-                data = data.replace(/\x1B/g, '&#9;');
-                document.getElementById('status').innerHTML = "<p>"+data+"</p>";
+                data = data.replace(/\x1B/g, '');
+                data = data_format(data);
+                document.getElementById('status').innerHTML = data;
             })
             .catch(error => {
                 console.error('Error:', error);
