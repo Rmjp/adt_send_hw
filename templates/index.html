@@ -23,6 +23,20 @@
         </div>
     </div>
     <script>
+// +-------------------+-------+---------+-----------------------------------+------------+ 0
+// |      LABNAME      | LABNO | #SUBMIT |              STATUS               |  DUEDATE   | 1
+// +-------------------+-------+---------+-----------------------------------+------------+ 2
+// |\x1BhelloWorld\x1B|\x1B01\x1B|\x1B1\x1B|\x1BP\x1B|\x1B10/7/2023\x1B|
+// |\x1Btrapezoid     |  01   |    6    |               PPPP                | 10/7/2023  |
+// |\x1Bwaiting      |  01   |    1    |               PPPP                | 10/7/2023  |
+// |\x1BtimeConverter   |  01   |    3    |               PPPPP               | 10/7/2023  |
+// |\x1BasciiCompare    |  01   |    0    |             NOT SEND              | 10/7/2023  |
+// |       eater       |  01   |    0    |             NOT SEND              | 10/7/2023  |
+// +-------------------+-------+---------+-----------------------------------+------------+
+        function data_format(data){
+            data = data.split("\n");
+            data
+        }
         if(document.cookie != ""){
             document.getElementById("myModal").style.display = "none";
         }
@@ -72,7 +86,7 @@
                 }
             })
             .then(data => {
-                data = data.replace(/\n/g, '<br>').replace(/\x1B/g, '&#9;');
+                // data = data.replace(/\n/g, '<br>').replace(/\x1B/g, '&#9;');
                 document.getElementById('status').innerHTML = "<p>"+data+"</p>";
             })
             .catch(error => {
