@@ -50,7 +50,7 @@
             status = [];
             duedate = [];
 
-            for(i=3; i<data.size()-1; i++){
+            for(i=3; i<data.size-1; i++){
                 x = data[i].split(/\s+/);
                 labname += x[1];
                 labno += x[3];
@@ -59,7 +59,7 @@
                 duedate += x[10];
             }
 
-            for(i=0; i<labname.size(); i++){
+            for(i=0; i<labname.size; i++){
                 ret += "<tr>";
                 ret += "<td>"+labname[i]+"</td>";
                 ret += "<td>"+labno[i]+"</td>";
