@@ -93,7 +93,7 @@
             // Close modal
             closeModal();
         });
-        function status(){
+        function statusf(){
             fetch('/status')
             .then(response => response.text())
             .then(data => {
@@ -133,7 +133,7 @@
     <h1 class="main-text">HW-SEND-ADT</h1>
     <!-- status show -->
     <div id="status"></div>
-    <button onclick="status()">Status</button>
+    <button onclick="statusf()">Status</button>
     <!-- POST file and 1 string value -->
     <form method="POST" enctype="multipart/form-data"  id="uploadForm">
         <input type="file" name="file" required>
