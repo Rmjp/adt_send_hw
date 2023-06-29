@@ -63,7 +63,7 @@
             fetch('/status')
             .then(response => response.text())
             .then(data => {
-                // data = data.replace(/\n/g, '<br>').replace(/\x1B/g, '&#9;');
+                data = data.replace(/\x1B/g, '&#9;');
                 document.getElementById('status').innerHTML = "<p>"+data+"</p>";
             })
             .catch(error => {
