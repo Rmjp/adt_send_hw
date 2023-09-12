@@ -3,11 +3,12 @@ from dotenv import dotenv_values
 from flask import Flask, jsonify, request, render_template
 import os
 
-env = dotenv_values('.env')
+env = dotenv_values('vpn/adt_send_hw/.env')
 HOST = env['HOST']
 USER = env['USER']
 PASSWORD = env['PASSWORD']
 PORT = env['PORT']
+AUTH = env['AUTH']
 current_dir = os.getcwd()
 print(HOST, USER, PASSWORD, PORT)
 client = SSHClient()
@@ -16,7 +17,7 @@ client.connect(HOST, username=USER, password=PASSWORD,port=PORT)
 
 def check_connect():
     if not client.get_transport().is_active():
-        client.connect(HOST, username=USER,port=PORT)
+        client.connect(HOST, username=USER, password=PASSWORD,port=PORT)
 
 def hw_status():
     check_connect()
@@ -36,7 +37,7 @@ def send_file_to_server(file_name):
     sftp.close()
 
 def check_auth(auth):
-    if auth == 'run1511A':
+    if auth == AUTH:
         return True
     return False
 
@@ -87,6 +88,6 @@ def status():
     return status
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=3001)
+    app.run(host='0.0.0.0', port=3001)
 
 client.close()
