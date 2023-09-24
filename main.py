@@ -3,7 +3,9 @@ from dotenv import dotenv_values
 from flask import Flask, jsonify, request, render_template
 import os
 
-env = dotenv_values('vpn/adt_send_hw/.env')
+env_path = os.environ.get('ENV_PATH')
+
+env = dotenv_values(env_path)
 HOST = env['HOST']
 USER = env['USER']
 PASSWORD = env['PASSWORD']
